@@ -1,17 +1,6 @@
-param(
-    # Add Resource ID below if you dont want to add multiple database at a time
-    #  $resourceID = "", 
-    $diagNameLaws = "ankurdiaglaws",
-    # Add your log analytics workspace NAME OR ID here at below
-    $laws = "samplelaws",
-    [switch]$set
-)
-  
-$metrics = '[{\"category\":\"Transaction\",\"retentionPolicy\":{\"days\":0,\"enabled\":false},\"enabled\":true}]'
 
-foreach ($resourceID in Get-Content .\filesa.txt) {
-    $storage_types = "blobServices", "tableServices", "queueServices", "fileServices"
-    foreach ($type in $storage_types) {
-        az monitor diagnostic-settings create --resource "$resourceID/$type/default" -n $diagNameLaws --workspace $laws --metrics $metrics
+foreach ($resourceID in Get-Content .\filers.txt) {
+   	foreach ($name in Get-Content .\filename.txt) {
+        az monitor diagnostic-settings delete --name $name --resource $resourceID
     }
 }

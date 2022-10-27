@@ -1,0 +1,6 @@
+$storage_types = "blobServices", "tableServices", "queueServices", "fileServices"
+foreach ($resourceID in Get-Content .\filers.txt) {
+   	foreach ($name in Get-Content .\filename.txt) {
+        az monitor diagnostic-settings delete --name $name --resource "$resourceID/$type/default"
+    }
+}

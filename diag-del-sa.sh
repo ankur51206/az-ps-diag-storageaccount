@@ -14,6 +14,7 @@ az monitor diagnostic-settings delete --resource "$1/fileServices/default" --nam
 echo "-----DELETED------"
 }
 
+# add your filename by replacing file.txt
 file=`cat file.txt`
 for i in $file;
 do
